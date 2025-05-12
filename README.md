@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +69,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+=======
+# ia-comunidades
+IA Comunidades é uma aplicação web projetada para facilitar a conexão entre pessoas interessadas em Inteligência Artificial. A plataforma permite que usuários visualizem, entrem e saiam de comunidades. Este projeto foi desenvolvido como teste técnico para empresa Central IA.
+>>>>>>> 6a55426053b50d732f6818766b48c06db88c3f45
