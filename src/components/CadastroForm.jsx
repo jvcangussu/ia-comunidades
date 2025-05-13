@@ -1,10 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Input, Button } from '@headlessui/react';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db, setDoc, doc, getDocs, query, collection, where } from "../firebase-config";
 
-function Cadastro() {
+function CadastroForm() {
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -133,95 +134,74 @@ function Cadastro() {
   };
 
   return (
-    <div className="flex-grow flex flex-col items-center p-8 bg-gray-50">
-      <Link to="/">
-        <img
-          src="/logo512.png"
-          alt="Logo do site"
-          className="w-32 h-32 mb-8 transition-transform transform hover:scale-110"
-        />
-      </Link>
+    <>
+      {successMessage && (
+        <div className="mb-4 text-green-700 rounded-md text-center">
+          {successMessage}
+        </div>
+      )}
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label htmlFor="username" className="block text-sm font-medium text-sky-800">Nome de usuário</label>
+          <Input
+            id="username"
+            type="text"
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+            className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+          {errors.username && <p className="text-red-500 text-xs">{errors.username}</p>}
+        </div>
 
-      <div className="w-full max-w-sm p-6 border-2 border-sky-950 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 text-sky-900">Realize seu cadastro:</h2>
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-sm font-medium text-sky-800">Email</label>
+          <Input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+          {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
+        </div>
 
-        {successMessage && (
-          <div className="mb-4 text-green-700 rounded-md text-center">
-            {successMessage}
-          </div>
-        )}
+        <div className="mb-4">
+          <label htmlFor="password" className="block text-sm font-medium text-sky-800">Senha</label>
+          <Input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+          {errors.password && <p className="text-red-500 text-xs">{errors.password}</p>}
+        </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="username" className="block text-sm font-medium text-sky-800">Nome de usuário</label>
-            <Input
-              id="username"
-              type="text"
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
-              className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-            {errors.username && <p className="text-red-500 text-xs">{errors.username}</p>}
-          </div>
+        <div className="mb-6">
+          <label htmlFor="confirmPassword" className="block text-sm font-medium text-sky-800">Confirme sua senha</label>
+          <Input
+            id="confirmPassword"
+            type="password"
+            value={confirmPassword}
+            onChange={(event) => setConfirmPassword(event.target.value)}
+            className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+          {errors.confirmPassword && <p className="text-red-500 text-xs">{errors.confirmPassword}</p>}
+        </div>
 
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-sky-800">Email</label>
-            <Input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-            {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="password" className="block text-sm font-medium text-sky-800">Senha</label>
-            <Input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-            {errors.password && <p className="text-red-500 text-xs">{errors.password}</p>}
-          </div>
-
-          <div className="mb-6">
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-sky-800">Confirme sua senha</label>
-            <Input
-              id="confirmPassword"
-              type="password"
-              value={confirmPassword}
-              onChange={(event) => setConfirmPassword(event.target.value)}
-              className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-            {errors.confirmPassword && <p className="text-red-500 text-xs">{errors.confirmPassword}</p>}
-          </div>
-
-          <Button
-            type="submit"
-            className="w-full px-4 py-2 bg-sky-900 text-white rounded-md hover:bg-sky-950 focus:ring-2 focus:ring-blue-500"
-          >
-            Cadastrar
-          </Button>
-        </form>
-
-        <p className="mt-4 text-center">
-          Já possui conta?{' '}
-          <Link to="/login" className="text-sky-900 hover:text-sky-950">
-            Faça login
-          </Link>
-        </p>
-      </div>
-
-    </div>
+        <Button
+          type="submit"
+          className="w-full px-4 py-2 bg-sky-900 text-white rounded-md hover:bg-sky-950 focus:ring-2 focus:ring-blue-500"
+        >
+          Cadastrar
+        </Button>
+      </form>
+    </>
   );
 }
 
-export default Cadastro;
+export default CadastroForm;
