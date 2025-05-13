@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Input, Button } from "@headlessui/react";
-import { auth, signInWithEmailAndPassword } from "../firebase-config";
+import { auth, signInWithEmailAndPassword, setPersistence, browserSessionPersistence } from "../firebase-config";
 
 function LoginForm() {
 
@@ -42,6 +42,8 @@ function LoginForm() {
     setLoading(true);
 
     try {
+      await setPersistence(auth, browserSessionPersistence);
+
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
       if (userCredential.user) {

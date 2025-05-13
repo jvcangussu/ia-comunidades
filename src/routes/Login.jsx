@@ -1,8 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { auth } from "../firebase-config";
 
 import LoginForm from "../components/LoginForm";
 
 function Login() {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (auth.currentUser) {
+      navigate("/comunidades");
+    }
+  }, [navigate]);
 
   return (
     <div className="flex-grow flex flex-col items-center p-8 bg-gray-50">
