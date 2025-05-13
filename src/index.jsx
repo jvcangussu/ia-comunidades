@@ -9,6 +9,7 @@ import Cadastro from './routes/Cadastro';
 import { auth } from './firebase-config';
 import Comunidades from './routes/Comunidades';
 import { useState, useEffect } from 'react';
+import ComunidadeDetalhes, { loader as comunidadeDetalhesLoader } from './routes/ComunidadeDetalhes';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -45,7 +46,14 @@ function App() {
         },
         {
           path: '/comunidades',
-          element: auth.currentUser ? <Comunidades /> : <Navigate to="/login" />
+          element: auth.currentUser ? <Comunidades /> : <Navigate to="/login" />,
+          children: [
+            {
+              path: ':comunidadeId',
+              element: <ComunidadeDetalhes />,
+              loader: comunidadeDetalhesLoader
+            }
+          ]
         }
 
       ]

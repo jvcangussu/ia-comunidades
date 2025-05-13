@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import { auth, db } from '../firebase-config';
 import { doc, getDoc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { getCommunities } from '../lib/communities';
+import CommunityList from '../components/CommunityList';
+
+const comunidades = await getCommunities();
 
 function Comunidades() {
   const [username, setUsername] = useState('');
@@ -9,30 +13,27 @@ function Comunidades() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Verificar se o usuário está autenticado
     const user = auth.currentUser;
     if (!user) {
-      // Redireciona para a página de login se o usuário não estiver autenticado
       navigate('/login');
       return;
     }
 
-    // Buscar o nome de usuário no Firestore
     const fetchUserData = async () => {
       try {
-        const userRef = doc(db, 'users', user.uid); // Buscar documento do usuário
+        const userRef = doc(db, 'users', user.uid);
         const docSnap = await getDoc(userRef);
 
         if (docSnap.exists()) {
           const userData = docSnap.data();
-          setUsername(userData.username); // Armazena o nome de usuário
+          setUsername(userData.username);
         } else {
           console.log('No such document!');
         }
       } catch (error) {
         console.error('Error fetching user data:', error);
       } finally {
-        setLoading(false); // Finaliza o carregamento
+        setLoading(false);
       }
     };
 
@@ -40,13 +41,13 @@ function Comunidades() {
   }, [navigate]);
 
   if (loading) {
-    return <p>Carregando...</p>; // Exibe uma mensagem de carregamento enquanto busca o nome de usuário
+    return <p>Carregando...</p>;
   }
 
   return (
-    <div className="flex-grow flex flex-col items-center p-8 bg-gray-50">
-      <h1>Olá, {username || 'Visitante'}</h1>
-      <p>Bem-vindo à página de Comunidades!</p>
+    <div className="flex-grow p-8 bg-gray-50">
+      <Outlet />
+      <CommunityList communities={comunidades} />
     </div>
   );
 }
