@@ -10,6 +10,7 @@ import { auth } from './firebase-config';
 import Comunidades from './routes/Comunidades';
 import { useState, useEffect } from 'react';
 import ComunidadeDetalhes, { loader as comunidadeDetalhesLoader } from './routes/ComunidadeDetalhes';
+import CriarComunidade from './routes/CriarComunidade';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -49,9 +50,13 @@ function App() {
           element: auth.currentUser ? <Comunidades /> : <Navigate to="/login" />,
           children: [
             {
-              path: ':comunidadeId',
+              path: '/comunidades/:comunidadeId',
               element: <ComunidadeDetalhes />,
               loader: comunidadeDetalhesLoader
+            },
+            {
+              path: '/comunidades/criar-comunidade',
+              element: <CriarComunidade />
             }
           ]
         }

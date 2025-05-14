@@ -47,6 +47,38 @@ export async function getCommunityById(id) {
   }
 }
 
+export async function createCommunity({ name, description, imageUrl, creatorId }) {
+  try {
+    const res = await axios.post(
+      `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/communities?key=${API_KEY}`,
+      {
+        fields: {
+          name: { stringValue: name },
+          description: { stringValue: description },
+          image: { stringValue: imageUrl },
+          members: {
+            arrayValue: {
+              values: [{ stringValue: creatorId }]
+            }
+          }
+        }
+      },
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
+
+    return {
+      success: true,
+      id: res.data.name.split('/').pop(),
+      data: res.data
+    };
+  } catch (error) {
+    console.error('Erro ao criar comunidade:', error);
+    return { success: false, error };
+  }
+}
+
 export async function addMember(communityId, userId) {
   try {
     const community = await getCommunityById(communityId);
