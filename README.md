@@ -4,7 +4,7 @@ Um projeto React completo que permite aos usuários explorar, entrar, sair e cri
 
 ---
 
-##Demonstração
+## Demonstração
 
 Assista à demonstração do projeto no YouTube:
 
@@ -80,6 +80,7 @@ Caso o seu navegador não abra automaticamente, abra o navegador e navegue para 
 ---
 
 👤 Autor
+
 Desenvolvido por João Vitor Cangussu
 
 🔗 [LinkedIn](https://www.linkedin.com/in/jvcangussu)
