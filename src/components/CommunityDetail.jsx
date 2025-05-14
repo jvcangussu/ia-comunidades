@@ -90,7 +90,7 @@ function CommunityDetail({ id, name, imageUrl, description, members = [] }) {
         ) : userList.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {userList.map((user) => (
-              <UserCard key={user.id} name={user.username} photoUrl={user.picture} />
+              <UserCard key={user.id} name={user.username} picture={user.picture} />
             ))}
           </div>
         ) : (

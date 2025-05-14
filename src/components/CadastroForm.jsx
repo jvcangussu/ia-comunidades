@@ -98,9 +98,9 @@ function CadastroForm() {
         username: username,
         email: email,
         createdAt: new Date(),
+        picture: '',
+        communities: []
       });
-
-      console.log('Usuário cadastrado e documento criado no Firestore!');
 
       setUsername('');
       setEmail('');
@@ -114,12 +114,8 @@ function CadastroForm() {
         confirmPassword: '',
       });
 
-      setSuccessMessage('Cadastro realizado com sucesso!');
-
-      setTimeout(() => {
-        setSuccessMessage('');
-        navigate('/login');
-      }, 1000);
+      setSuccessMessage("Cadastro realizado!");
+      navigate("/comunidades");
 
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
