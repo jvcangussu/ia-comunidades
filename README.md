@@ -1,73 +1,92 @@
-# ia-comunidades
-IA Comunidades é uma aplicação web projetada para facilitar a conexão entre pessoas interessadas em Inteligência Artificial. A plataforma permite que usuários visualizem, entrem e saiam de comunidades. Este projeto foi desenvolvido como teste técnico para empresa Central IA.
+# 🧠 IA Comunidades
 
-# Getting Started with Create React App
+Um projeto React completo que permite aos usuários explorar, entrar, sair e criar comunidades com autenticação, armazenamento de imagens e uma UI moderna e responsiva com TailwindCSS.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+##Demonstração
 
-In the project directory, you can run:
+Assista à demonstração do projeto no YouTube:
 
-### `npm start`
+[▶️ Ver vídeo no YouTube](https://youtu.be/s9xOqEXl8kM)
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Funcionalidades
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Cadastro e login com autenticação Firebase
+- Armazenamento de usuários e comunidades no Firestore
+- Upload de imagens via Supabase Storage
+- Exploração de comunidades com modal de detalhes
+- Entrada e saída de membros com sincronização em tempo real
+- Criação de comunidades com upload de imagem
+- Interface 100% reativa usando React Router
+- Design responsivo com TailwindCSS + Headless UI + React Icons
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🧩 Tecnologias utilizadas
 
-### `npm run build`
+- ⚛️ React
+- 🌬 TailwindCSS
+- 🧠 Firebase (Auth + Firestore)
+- 📦 Supabase (Storage)
+- 🧭 React Router DOM
+- 🧱 Headless UI
+- 🎨 React Icons
+- 🔗 Axios
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🛠 Instalação e execução local
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 0. Requisitos
+Antes de começar, certifique-se de ter instalado:
 
-### `npm run eject`
+- [Node.js](https://nodejs.org/) (recomendado v18 ou superior)
+- [npm](https://www.npmjs.com/) (já incluído no Node)
+- [Git](https://git-scm.com/)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Você pode verificar as versões com:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+node -v
+npm -v
+git --version
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 1. Clone o repositório:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+git clone https://github.com/jvcangussu/ia-comunidades.git
+cd ia-comunidades
+```
 
-## Learn More
+### 2. Instale as dependências:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 3. Execute o projeto:
 
-### Code Splitting
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 4. Abra no seu navegador:
 
-### Analyzing the Bundle Size
+Caso o seu navegador não abra automaticamente, abra o navegador e navegue para o endereço: localhost:3000
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+👤 Autor
+Desenvolvido por João Vitor Cangussu
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+🔗 [LinkedIn](https://www.linkedin.com/in/jvcangussu)
 
-### Advanced Configuration
+💻 [GitHub](https://www.github.com/jvcangussu)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+📄 Licença
+Este projeto foi desenvolvido como teste técnico e pode ser usado e adaptado livremente para fins educacionais e pessoais.
