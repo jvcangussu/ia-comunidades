@@ -1,7 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import CadastroForm from "../components/CadastroForm";
 
 function Cadastro() {
+  const { user } = useAuth();
+
+  if (user === undefined) return <p>Verificando autenticação...</p>;
+  if (user) return <Navigate to="/comunidades" />;
 
   return (
     <div className="flex-grow flex flex-col items-center p-8 bg-gray-50">
@@ -19,13 +24,12 @@ function Cadastro() {
         <CadastroForm />
 
         <p className="mt-4 text-center">
-          Já possui conta?{' '}
+          Já possui conta?{" "}
           <Link to="/login" className="text-sky-900 hover:text-sky-950">
             Faça login
           </Link>
         </p>
       </div>
-
     </div>
   );
 }

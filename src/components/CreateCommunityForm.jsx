@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createCommunity } from "../lib/communities";
 import { auth } from "../firebase-config";
+import { uploadCommunityImage } from "../lib/storage";
 
 function CreateCommunityForm() {
   const navigate = useNavigate();
@@ -39,7 +40,11 @@ function CreateCommunityForm() {
         return;
       }
 
-      const imageUrl = '';
+      let imageUrl = '';
+
+      if (imageFile) {
+        imageUrl = await uploadCommunityImage(imageFile);
+      }
 
       const result = await createCommunity({
         name,

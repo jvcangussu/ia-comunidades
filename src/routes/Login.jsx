@@ -1,18 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { auth } from "../firebase-config";
-
+import { Link, Navigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import LoginForm from "../components/LoginForm";
 
 function Login() {
+  const { user } = useAuth();
 
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (auth.currentUser) {
-      navigate("/comunidades");
-    }
-  }, [navigate]);
+  if (user === undefined) return <p>Verificando autenticação...</p>;
+  if (user) return <Navigate to="/comunidades" />;
 
   return (
     <div className="flex-grow flex flex-col items-center p-8 bg-gray-50">
@@ -30,12 +24,11 @@ function Login() {
         <LoginForm />
 
         <p className="mt-4 text-center">
-          Ainda não possui conta?{' '}
+          Ainda não possui conta?{" "}
           <Link to="/cadastro" className="text-sky-900 hover:text-sky-950">
             Faça cadastro
           </Link>
         </p>
-
       </div>
     </div>
   );

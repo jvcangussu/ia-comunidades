@@ -11,20 +11,13 @@ import Comunidades from './routes/Comunidades';
 import { useState, useEffect } from 'react';
 import ComunidadeDetalhes, { loader as comunidadeDetalhesLoader } from './routes/ComunidadeDetalhes';
 import CriarComunidade from './routes/CriarComunidade';
+import { AuthProvider } from './context/AuthContext';
+import { useAuth } from './context/AuthContext';
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { user } = useAuth();
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setIsAuthenticated(!!user);
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  if (loading) {
+  if (user === undefined) {
     return <div>Carregando...</div>;
   }
 
@@ -33,21 +26,12 @@ function App() {
       path: '/',
       element: <RootLayout />,
       children: [
-        {
-          path: '/',
-          element: <Home />
-        },
-        {
-          path: '/login',
-          element: <Login />
-        },
-        {
-          path: '/cadastro',
-          element: <Cadastro />
-        },
+        { path: '/', element: <Home /> },
+        { path: '/login', element: <Login /> },
+        { path: '/cadastro', element: <Cadastro /> },
         {
           path: '/comunidades',
-          element: auth.currentUser ? <Comunidades /> : <Navigate to="/login" />,
+          element: <Comunidades />,
           children: [
             {
               path: '/comunidades/:comunidadeId',
@@ -60,7 +44,6 @@ function App() {
             }
           ]
         }
-
       ]
     }
   ]);
@@ -71,6 +54,8 @@ function App() {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </React.StrictMode>
 );

@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react';
-import { auth } from '../firebase-config';
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { getUserById } from '../lib/users';
 import { getCommunities } from '../lib/communities';
 import MainHeader from '../components/MainHeader';
 import CommunityList from '../components/CommunityList';
+import { useAuth } from '../context/AuthContext';
 
 function Comunidades() {
+  const { user } = useAuth();
   const [userInfo, setUserInfo] = useState(null);
   const [communities, setCommunities] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const location = useLocation(); // 👈 necessário para escutar rota atual
+  const location = useLocation();
 
   useEffect(() => {
-    const user = auth.currentUser;
-
+    if (user === undefined) return;
     if (!user) {
       navigate('/login');
       return;
@@ -36,13 +36,17 @@ function Comunidades() {
     };
 
     fetchData();
-  }, [navigate, location.pathname]); // 🔁 refaz fetch sempre que a rota mudar
+  }, [user, location.pathname, navigate]);
 
-  if (loading) return <p>Carregando...</p>;
+  if (user === undefined || loading) return <p>Carregando...</p>;
+
+  const handlePictureUpdate = (newUrl) => {
+    setUserInfo(prev => ({ ...prev, picture: newUrl }));
+  };
 
   return (
     <div className="flex-grow bg-gray-50 py-4">
-      <MainHeader userData={userInfo} />
+      <MainHeader userData={userInfo} onPictureUpdate={handlePictureUpdate} />
       <div className="pt-24 px-8">
         <Outlet />
         <CommunityList communities={communities} />

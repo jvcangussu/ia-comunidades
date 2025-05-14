@@ -124,3 +124,27 @@ export async function leaveCommunity(communityId, userId) {
   }
 }
 
+export async function updateUserPicture(userId, imageUrl) {
+  try {
+    const user = await getUserById(userId);
+
+    await axios.patch(
+      `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/users/${userId}?key=${API_KEY}`,
+      {
+        fields: {
+          picture: { stringValue: imageUrl },
+        },
+      },
+      {
+        params: { 'updateMask.fieldPaths': 'picture' },
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+
+    return { success: true };
+  } catch (error) {
+    console.error('Erro ao atualizar foto de perfil:', error);
+    return { success: false, error };
+  }
+}
+
