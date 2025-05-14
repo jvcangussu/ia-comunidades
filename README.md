@@ -90,4 +90,5 @@ Desenvolvido por João Vitor Cangussu
 ---
 
 📄 Licença
+
 Este projeto foi desenvolvido como teste técnico e pode ser usado e adaptado livremente para fins educacionais e pessoais.
