@@ -115,7 +115,11 @@ function CadastroForm() {
       });
 
       setSuccessMessage("Cadastro realizado!");
-      navigate("/comunidades");
+
+      setTimeout(() => {
+        navigate("/comunidades");
+        setSuccessMessage('');
+      }, 1500);
 
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
