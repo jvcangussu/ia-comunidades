@@ -15,7 +15,7 @@ function ComunidadeDetalhes() {
 
   return (
     <Modal isOpen={true} onClose={handleClose}>
-      <CommunityDetail name={comunidade.name} description={comunidade.description} image={comunidade.image} members={comunidade.members} />
+      <CommunityDetail id={comunidade.id} name={comunidade.name} description={comunidade.description} image={comunidade.image} members={comunidade.members} />
     </Modal>
   );
 }

@@ -46,3 +46,63 @@ export async function getCommunityById(id) {
     return null;
   }
 }
+
+export async function addMember(communityId, userId) {
+  try {
+    const community = await getCommunityById(communityId);
+    const members = community.members || [];
+
+    const updated = members.includes(userId)
+      ? members
+      : [...members, userId];
+
+    await axios.patch(
+      `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/communities/${communityId}?key=${API_KEY}`,
+      {
+        fields: {
+          members: {
+            arrayValue: {
+              values: updated.map(id => ({ stringValue: id })),
+            },
+          },
+        },
+      },
+      {
+        params: { 'updateMask.fieldPaths': 'members' },
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  } catch (error) {
+    console.error('Erro ao adicionar membro:', error);
+    throw error;
+  }
+}
+
+export async function removeMember(communityId, userId) {
+  try {
+    const community = await getCommunityById(communityId);
+    const members = community.members || [];
+
+    const updated = members.filter(id => id !== userId);
+
+    await axios.patch(
+      `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/communities/${communityId}?key=${API_KEY}`,
+      {
+        fields: {
+          members: {
+            arrayValue: {
+              values: updated.map(id => ({ stringValue: id })),
+            },
+          },
+        },
+      },
+      {
+        params: { 'updateMask.fieldPaths': 'members' },
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  } catch (error) {
+    console.error('Erro ao remover membro:', error);
+    throw error;
+  }
+}
