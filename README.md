@@ -75,7 +75,7 @@ npm start
 
 ### 4. Abra no seu navegador:
 
-Caso o seu navegador não abra automaticamente, abra o navegador e navegue para o endereço: localhost:3000
+Caso o seu navegador não abra automaticamente, abra o navegador e navegue para o endereço: http://localhost:3000
 
 ---
 
